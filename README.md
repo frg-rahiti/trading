@@ -1,0 +1,2 @@
+# trading
+Only for trading
