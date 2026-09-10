@@ -1,0 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import 'tailwindcss';
+:root{--bg:#f8f9fc;--ink:#101426;--muted:#667085;--purple:#8b5cf6;--blue:#3b82f6;--line:#e6e8f0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif}.container{width:min(1180px,92%);margin:auto}.gradient{background:linear-gradient(135deg,#8b5cf6,#3b82f6);-webkit-background-clip:text;background-clip:text;color:transparent}.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:13px 18px;font-weight:700;text-decoration:none}.btn-primary{background:#101426;color:white}.btn-secondary{background:white;border:1px solid var(--line);color:#101426}.card{background:white;border:1px solid var(--line);border-radius:20px;box-shadow:0 10px 30px rgba(16,20,38,.05)}
