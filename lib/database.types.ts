@@ -11,5 +11,5 @@ export type Database = {
     backtests: { Row: { id:string; product_id:string; title:string; report_path:string|null; metrics:Json; created_at:string }; Insert: Partial<Database['public']['Tables']['backtests']['Row']> & { product_id:string; title:string }; Update: Partial<Database['public']['Tables']['backtests']['Row']> };
     monte_carlo_reports: { Row: { id:string; product_id:string; title:string; report_path:string|null; metrics:Json; created_at:string }; Insert: Partial<Database['public']['Tables']['monte_carlo_reports']['Row']> & { product_id:string; title:string }; Update: Partial<Database['public']['Tables']['monte_carlo_reports']['Row']> };
     site_settings: { Row: { key:string; value:Json; updated_at:string }; Insert: Partial<Database['public']['Tables']['site_settings']['Row']> & { key:string }; Update: Partial<Database['public']['Tables']['site_settings']['Row']> };
-  };
+  }; };
 };
