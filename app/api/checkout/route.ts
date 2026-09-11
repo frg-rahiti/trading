@@ -2,7 +2,11 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createServerSupabase } from '../../../lib/supabase-server';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+function getStripe() {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) throw new Error('STRIPE_SECRET_KEY is not configured');
+  return new Stripe(key);
+}
 
 export async function POST(req: Request) {
   try {
@@ -25,6 +29,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'This product is not configured for checkout yet' }, { status: 409 });
     }
 
+    const stripe = getStripe();
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items: [{ price: product.stripe_price_id, quantity: 1 }],
