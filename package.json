@@ -2,7 +2,29 @@
   "name": "tahitian-trader",
   "version": "0.1.0",
   "private": true,
-  "scripts": {"dev": "next dev", "build": "next build", "start": "next start", "lint": "next lint"},
-  "dependencies": {"@supabase/ssr": "latest", "@supabase/supabase-js": "latest", "lucide-react": "latest", "next": "latest", "react": "latest", "react-dom": "latest", "stripe": "latest"},
-  "devDependencies": {"@types/node": "latest", "@types/react": "latest", "@types/react-dom": "latest", "tailwindcss": "latest", "typescript": "latest", "eslint": "latest", "eslint-config-next": "latest"}
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@supabase/ssr": "latest",
+    "@supabase/supabase-js": "latest",
+    "@vercel/analytics": "^2.0.1",
+    "lucide-react": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "stripe": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "tailwindcss": "latest",
+    "typescript": "latest"
+  }
 }
