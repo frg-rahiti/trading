@@ -18,6 +18,10 @@ Tahitian Trader is a premium platform for systematic trading products: MetaTrade
 - Secure product downloads
 - Admin area
 
+## Deployment
+
+Production is deployed from `main` through Vercel. Environment variable changes require a new deployment.
+
 ## Roadmap
 
 - V2: additional EAs, TradingView indicators and bundles
