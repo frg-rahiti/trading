@@ -2,17 +2,25 @@ import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
 import { createAdminSupabase } from '../../../../lib/supabase-admin';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+function getStripe() {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) throw new Error('STRIPE_SECRET_KEY is not configured');
+  return new Stripe(key);
+}
 
 export async function POST(req: Request) {
   const signature = req.headers.get('stripe-signature');
   if (!signature) return NextResponse.json({ error: 'Missing signature' }, { status: 400 });
 
   try {
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+    if (!webhookSecret) throw new Error('STRIPE_WEBHOOK_SECRET is not configured');
+
+    const stripe = getStripe();
     const event = stripe.webhooks.constructEvent(
       await req.text(),
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!,
+      webhookSecret,
     );
 
     if (event.type === 'checkout.session.completed') {
