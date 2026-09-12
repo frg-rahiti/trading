@@ -52,6 +52,18 @@ export default function SiteHeader() {
     <button className="nav-link nav-button" type="button" onClick={signOut}>Sign out</button>
   ) : null;
 
+  const primaryCta = userEmail ? (
+    <Link className="btn btn-primary" href="/dashboard" prefetch>Dashboard</Link>
+  ) : (
+    <Link className="btn btn-primary" href="/products" prefetch>Explore products</Link>
+  );
+
+  const mobilePrimaryCta = userEmail ? (
+    <Link className="btn btn-accent" href="/dashboard" prefetch style={{marginTop:8}}>Dashboard</Link>
+  ) : (
+    <Link className="btn btn-accent" href="/products" prefetch style={{marginTop:8}}>Explore products</Link>
+  );
+
   return (
     <header className="site-header">
       <div className="container header-inner">
@@ -68,7 +80,7 @@ export default function SiteHeader() {
           ))}
           {ready && accountLink}
           {ready && accountAction}
-          <Link className="btn btn-primary" href="/products" prefetch>Explore products</Link>
+          {ready && primaryCta}
         </nav>
 
         <details className="mobile-nav">
@@ -79,7 +91,7 @@ export default function SiteHeader() {
             ))}
             {ready && accountLink}
             {ready && accountAction}
-            <Link className="btn btn-accent" href="/products" prefetch style={{marginTop:8}}>Explore products</Link>
+            {ready && mobilePrimaryCta}
           </div>
         </details>
       </div>
