@@ -1,30 +1,4 @@
 'use client';
-import { FormEvent, useEffect, useState } from 'react';
-import Link from 'next/link';
-import { createClient } from '../../lib/supabase';
-
-function getSafeNext() {
-  const value = new URLSearchParams(window.location.search).get('next');
-  return value && value.startsWith('/') && !value.startsWith('//') ? value : '/dashboard';
-}
-
-export default function Login(){
-  const [email,setEmail]=useState(''); const [password,setPassword]=useState(''); const [message,setMessage]=useState('');
-
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user) window.location.href = getSafeNext();
-    });
-  }, []);
-
-  async function submit(e:FormEvent){
-    e.preventDefault();
-    setMessage('Signing in…');
-    const {error}=await createClient().auth.signInWithPassword({email,password});
-    if(error){setMessage(error.message);return}
-    window.location.href=getSafeNext();
-  }
-
-  return <main className="container form-shell"><div className="card form-card"><Link className="brand" href="/" prefetch><span className="brand-mark">TT</span><span>TAHITIAN <span className="gradient">TRADER</span></span></Link><h1>Welcome back.</h1><p className="muted">Access your products, licenses and secure downloads.</p><form onSubmit={submit}><input aria-label="Email" type="email" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} required/><input aria-label="Password" type="password" placeholder="Password" value={password} onChange={e=>setPassword(e.target.value)} required/><button className="btn btn-accent" type="submit">Sign in <span aria-hidden>→</span></button></form>{message&&<p className="muted" style={{marginTop:15,fontSize:13}}>{message}</p>}<p className="muted" style={{marginTop:22,fontSize:13}}>New here? <Link href="/signup" prefetch style={{fontWeight:800}}>Create an account</Link></p></div></main>
-}
+import { FormEvent,useEffect,useState } from 'react'; import Link from 'next/link'; import { createClient } from '../../lib/supabase'; import LanguageSwitcher from '../../components/LanguageSwitcher';
+function getSafeNext(){const value=new URLSearchParams(window.location.search).get('next');return value&&value.startsWith('/')&&!value.startsWith('//')?value:'/dashboard';}
+export default function Login(){const [email,setEmail]=useState('');const [password,setPassword]=useState('');const [message,setMessage]=useState('');const [fr,setFr]=useState(false);useEffect(()=>{setFr(document.cookie.includes('tt-locale=fr'));const supabase=createClient();supabase.auth.getUser().then(({data})=>{if(data.user)window.location.href=getSafeNext()})},[]);const t=fr?{welcome:'Bon retour.',copy:'Accédez à vos produits, licences et téléchargements sécurisés.',sign:'Se connecter',new:'Nouveau ici ?',create:'Créer un compte',email:'E-mail',password:'Mot de passe'}:{welcome:'Welcome back.',copy:'Access your products, licenses and secure downloads.',sign:'Sign in',new:'New here?',create:'Create an account',email:'Email',password:'Password'};async function submit(e:FormEvent){e.preventDefault();setMessage(fr?'Connexion…':'Signing in…');const {error}=await createClient().auth.signInWithPassword({email,password});if(error){setMessage(error.message);return}window.location.href=getSafeNext()}return <main className="container form-shell"><div className="card form-card"><div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}><Link className="brand" href="/" prefetch><span className="brand-mark">TT</span><span>TAHITIAN <span className="gradient">TRADER</span></span></Link><LanguageSwitcher/></div><h1>{t.welcome}</h1><p className="muted">{t.copy}</p><form onSubmit={submit}><input aria-label={t.email} type="email" placeholder={t.email} value={email} onChange={e=>setEmail(e.target.value)} required/><input aria-label={t.password} type="password" placeholder={t.password} value={password} onChange={e=>setPassword(e.target.value)} required/><button className="btn btn-accent" type="submit">{t.sign} <span aria-hidden>→</span></button></form>{message&&<p className="muted" style={{marginTop:15,fontSize:13}}>{message}</p>}<p className="muted" style={{marginTop:22,fontSize:13}}>{t.new} <Link href="/signup" prefetch style={{fontWeight:800}}>{t.create}</Link></p></div></main>}
