@@ -42,9 +42,7 @@ export default function SiteHeader() {
     window.location.href = '/';
   }
 
-  const accountLink = userEmail ? (
-    <Link className="nav-link" href="/dashboard" prefetch>Dashboard</Link>
-  ) : (
+  const accountLink = userEmail ? null : (
     <Link className="nav-link" href="/login" prefetch>Login</Link>
   );
 
