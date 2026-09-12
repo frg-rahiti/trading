@@ -29,16 +29,16 @@ export default async function Product({ params }: { params: Promise<{ slug: stri
         <p className="muted" style={{fontSize:19,lineHeight:1.8,maxWidth:790}}>{product.description || 'Commercial and technical details will be published with the verified product release.'}</p>
       </div>
 
-      <div className="grid" style={{gridTemplateColumns:'minmax(0,1.55fr) minmax(300px,.75fr)',marginTop:42,alignItems:'start'}}>
+      <div className="grid product-detail-layout" style={{gridTemplateColumns:'minmax(0,1.55fr) minmax(300px,.75fr)',marginTop:42,alignItems:'start'}}>
         <section className="card" style={{padding:32}}>
-          <div className="grid" style={{gridTemplateColumns:'repeat(3,minmax(0,1fr))',paddingBottom:26,borderBottom:'1px solid var(--line)'}}>
+          <div className="grid product-facts" style={{gridTemplateColumns:'repeat(3,minmax(0,1fr))',paddingBottom:26,borderBottom:'1px solid var(--line)'}}>
             <div><span className="muted" style={{fontSize:12}}>Platform</span><strong style={{display:'block',marginTop:6,textTransform:'uppercase'}}>{product.platform}</strong></div>
             <div><span className="muted" style={{fontSize:12}}>Version</span><strong style={{display:'block',marginTop:6}}>{version?.version ?? 'V1'}</strong></div>
             <div><span className="muted" style={{fontSize:12}}>Release</span><strong style={{display:'block',marginTop:6}}>{version?.release_date ?? 'Launch build'}</strong></div>
           </div>
 
           <h2 style={{marginTop:32,fontSize:26,letterSpacing:'-.035em'}}>What you receive</h2>
-          {files.length ? <div className="grid" style={{marginTop:16}}>{files.map(file=><div key={file} className="card card-glass" style={{padding:'15px 17px',boxShadow:'none',display:'flex',justifyContent:'space-between',alignItems:'center'}}><strong>{file}</strong><span className="muted" style={{fontSize:12}}>Included</span></div>)}</div> : <p className="muted prose-muted">No downloadable file is associated with this version yet.</p>}
+          {files.length ? <div className="grid" style={{marginTop:16}}>{files.map(file=><div key={file} className="card card-glass" style={{padding:'15px 17px',boxShadow:'none',display:'flex',justifyContent:'space-between',alignItems:'center',gap:12}}><strong style={{overflowWrap:'anywhere'}}>{file}</strong><span className="muted" style={{fontSize:12,whiteSpace:'nowrap'}}>Included</span></div>)}</div> : <p className="muted prose-muted">No downloadable file is associated with this version yet.</p>}
 
           <h2 style={{marginTop:36,fontSize:26,letterSpacing:'-.035em'}}>Performance evidence</h2>
           <p className="muted prose-muted">Verified backtests and Monte Carlo results will be displayed here when published. Simulated results remain clearly separated from forward testing and live performance.</p>
@@ -46,10 +46,10 @@ export default async function Product({ params }: { params: Promise<{ slug: stri
           <div style={{marginTop:30,paddingTop:22,borderTop:'1px solid var(--line)'}}><strong>Secure delivery</strong><p className="muted" style={{fontSize:13,lineHeight:1.7,marginBottom:0}}>Files stay in private Supabase Storage and are delivered through temporary signed URLs after authenticated purchase verification.</p></div>
         </section>
 
-        <aside className="card card-dark" style={{padding:30,position:'sticky',top:98}}>
+        <aside className="card card-dark product-purchase" style={{padding:30,position:'sticky',top:98}}>
           <span className="eyebrow" style={{background:'rgba(255,255,255,.07)',borderColor:'rgba(255,255,255,.12)',color:'#bbaeff'}}>One-time access</span>
           <h2 style={{fontSize:28,letterSpacing:'-.04em',margin:'18px 0 8px'}}>Own this release.</h2>
-          <div style={{fontSize:42,fontWeight:900,letterSpacing:'-.055em'}}>{product.price_cents > 0 ? `${(product.price_cents/100).toFixed(0)} ${product.currency.toUpperCase()}` : 'Price pending'}</div>
+          <div style={{fontSize:'clamp(36px,5vw,42px)',fontWeight:900,letterSpacing:'-.055em'}}>{product.price_cents > 0 ? `${(product.price_cents/100).toFixed(0)} ${product.currency.toUpperCase()}` : 'Price pending'}</div>
           {product.price_cents > 0 ? <BuyButton productId={product.id} /> : <p style={{color:'#b7bfd4',lineHeight:1.7}}>Checkout will activate once the commercial price is configured.</p>}
           <div style={{borderTop:'1px solid rgba(255,255,255,.11)',marginTop:22,paddingTop:18}}><strong style={{fontSize:13}}>Risk notice</strong><p style={{color:'#aeb7ce',fontSize:12,lineHeight:1.65,marginBottom:0}}>Trading involves risk. Historical or simulated performance is not a guarantee of future results.</p></div>
         </aside>
