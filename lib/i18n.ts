@@ -3,7 +3,11 @@ import { cookies } from 'next/headers';
 export type Locale = 'en' | 'fr';
 
 type Entry = readonly [string, unknown];
-const section = <T extends Record<string, unknown>>(entries: readonly Entry[]) => Object.fromEntries(entries) as T;
+
+// Translation sections are runtime dictionaries. Keep their values intentionally
+// flexible because some entries are strings while others (such as resources.items)
+// are structured arrays. This avoids leaking `unknown` into page components.
+const section = (entries: readonly Entry[]): Record<string, any> => Object.fromEntries(entries);
 
 export async function getLocale(): Promise<Locale> {
   const store = await cookies();
@@ -38,7 +42,7 @@ const en = {
     ['deliveryText', 'Access your purchased files from your account.'], ['pricing', 'Clear pricing'], ['pricingText', 'The displayed price is the V1 purchase price.'],
     ['collection', 'The collection'], ['choose', 'Choose your system.'], ['intro', 'Read the dedicated product page for methodology, compatibility, delivery and performance evidence before checkout.'],
     ['fallback', 'Product details are available on the dedicated product page.'], ['view', 'View product'], ['prepared', 'Products are being prepared.'],
-    ['preparedText', 'The V1 catalog is configured privately and will appear here when published.'], ['pricingTitle', 'Simple by design.'],
+    ['preparedText', 'The V1 catalog is configured privately and will appear here once published.'], ['pricingTitle', 'Simple by design.'],
     ['pricingTextLong', 'The initial launch keeps the offer deliberately simple: individual products, one-time payment and digital delivery. Subscriptions, bundles, coupons and additional tiers are reserved for future versions.'],
   ]),
   performance: section([
@@ -69,7 +73,7 @@ const en = {
     ['ex5', 'MetaTrader 5 Expert Advisor (.ex5)'], ['pine', 'TradingView source (.pine)'], ['docs', 'Documentation'],
     ['commercialFallback', 'Commercial and technical details will be published with the verified product release.'],
   ]),
-} as const;
+};
 
 const fr = {
   nav: section([
@@ -129,7 +133,7 @@ const fr = {
     ['ex5', 'Expert Advisor MetaTrader 5 (.ex5)'], ['pine', 'Source TradingView (.pine)'], ['docs', 'Documentation'],
     ['commercialFallback', 'Les détails commerciaux et techniques seront publiés avec les informations produit vérifiées.'],
   ]),
-} as const;
+};
 
 export const translations = { en, fr } as const;
 
