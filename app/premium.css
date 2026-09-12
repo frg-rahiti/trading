@@ -1,0 +1,106 @@
+/* Premium visual layer: typography, mauve/violet/blue accents and richer surfaces. */
+body { font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif; }
+h1, h2, h3, h4, h5, h6, .brand, .btn, .nav-link, .eyebrow, .pill, .price, strong { font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif; }
+code, pre, .mono { font-family: var(--font-mono), ui-monospace, monospace; }
+
+h1, h2, h3 { text-wrap: balance; }
+
+body {
+  background:
+    radial-gradient(circle at 8% -5%, rgba(154, 111, 255, .14), transparent 31%),
+    radial-gradient(circle at 96% 8%, rgba(72, 126, 255, .12), transparent 29%),
+    radial-gradient(circle at 50% 100%, rgba(197, 126, 255, .06), transparent 34%),
+    var(--bg);
+}
+
+.site-header {
+  background: rgba(247, 248, 253, .72);
+  border-bottom-color: rgba(124, 92, 255, .12);
+}
+.brand-mark {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6257ff 48%, #3e7bff 100%);
+  box-shadow: 0 10px 28px rgba(104, 82, 239, .32);
+}
+.gradient {
+  background: linear-gradient(110deg, #8b5cf6 0%, #695cff 42%, #3e7bff 82%, #55c7ff 100%);
+}
+
+.btn-accent, .btn-primary { position: relative; overflow: hidden; }
+.btn-accent { background: linear-gradient(120deg, #8b5cf6, #665bff 48%, #3e7bff); box-shadow: 0 14px 34px rgba(101, 84, 235, .28); }
+.btn-accent:hover { box-shadow: 0 18px 42px rgba(101, 84, 235, .36); }
+
+.card {
+  box-shadow: 0 14px 45px rgba(38, 35, 83, .055);
+}
+.card:hover {
+  border-color: rgba(124, 92, 255, .28);
+  box-shadow: 0 18px 55px rgba(70, 58, 145, .09);
+}
+.product-card::before {
+  height: 4px;
+  background: linear-gradient(90deg, #a06bff, #765cff 45%, #3e7bff 78%, #58caff);
+}
+
+.hero::before {
+  background-image:
+    linear-gradient(rgba(112, 83, 205, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(62, 123, 255, .045) 1px, transparent 1px);
+}
+
+.premium-hero {
+  position: relative;
+  isolation: isolate;
+}
+.premium-hero::after {
+  content: '';
+  position: absolute;
+  width: min(620px, 70vw);
+  height: min(620px, 70vw);
+  right: -14%;
+  top: -35%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139,92,246,.13), rgba(62,123,255,.07) 42%, transparent 70%);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.shop-hero {
+  padding-bottom: 34px;
+}
+.shop-hero h1 { max-width: 900px; }
+.shop-intro { max-width: 760px; }
+.shop-principles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 30px;
+}
+.shop-principle {
+  padding: 17px 18px;
+  border: 1px solid rgba(124,92,255,.13);
+  border-radius: 15px;
+  background: rgba(255,255,255,.58);
+}
+.shop-principle strong { display: block; font-size: 13px; }
+.shop-principle span { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.shop-card {
+  padding: 30px;
+  background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(249,248,255,.88));
+}
+.shop-card .price { color: #5f4cbf; font-size: 24px; }
+
+.resource-card { min-height: 100%; }
+.resource-icon {
+  width: 42px; height: 42px; display: grid; place-items: center;
+  border-radius: 13px; color: white;
+  background: linear-gradient(135deg, #8b5cf6, #3e7bff);
+  box-shadow: 0 10px 24px rgba(100,82,225,.22);
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 600;
+}
+
+@media (max-width: 760px) {
+  .shop-principles { grid-template-columns: 1fr; }
+  .shop-card { padding: 23px; }
+}
