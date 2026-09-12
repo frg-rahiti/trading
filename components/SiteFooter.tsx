@@ -1,16 +1,2 @@
-import Link from 'next/link';
-
-export default function SiteFooter() {
-  return (
-    <footer className="site-footer">
-      <div className="container footer-inner">
-        <span>© 2026 Tahitian Trader · Algorithmic Trading Technology</span>
-        <nav className="footer-links" aria-label="Footer navigation">
-          <Link href="/legal/terms" prefetch>Terms</Link>
-          <Link href="/legal/privacy" prefetch>Privacy</Link>
-          <Link href="/legal/risk-disclaimer" prefetch>Risk disclaimer</Link>
-        </nav>
-      </div>
-    </footer>
-  );
-}
+import Link from 'next/link'; import LanguageSwitcher from './LanguageSwitcher';
+export default function SiteFooter(){ return <footer className="site-footer"><div className="container footer-inner"><span>© 2026 Tahitian Trader · Algorithmic Trading Technology</span><nav className="footer-links" aria-label="Footer navigation"><Link href="/legal/terms" prefetch>Terms</Link><Link href="/legal/privacy" prefetch>Privacy</Link><Link href="/legal/risk-disclaimer" prefetch>Risk disclaimer</Link><LanguageSwitcher/></nav></div></footer>; }
