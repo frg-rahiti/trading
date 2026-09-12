@@ -13,16 +13,16 @@ export default function LanguageSwitcher() {
   }, []);
 
   function changeLocale(next: Locale) {
-    document.cookie = `tt-locale=${next}; path=/; max-age=31536000; samesite=lax`;
+    document.cookie = `tt-locale=${next}; path=/; max-age=31536000; SameSite=Lax`;
     setLocale(next);
     window.location.reload();
   }
 
   return (
-    <div className="language-switcher" aria-label="Language">
-      <button type="button" className={locale === 'en' ? 'active' : ''} onClick={() => changeLocale('en')}>EN</button>
-      <span>/</span>
-      <button type="button" className={locale === 'fr' ? 'active' : ''} onClick={() => changeLocale('fr')}>FR</button>
+    <div className="language-switcher" aria-label="Language selector">
+      <button type="button" className={locale === 'en' ? 'active' : ''} onClick={() => changeLocale('en')} aria-pressed={locale === 'en'}>EN</button>
+      <span aria-hidden="true">/</span>
+      <button type="button" className={locale === 'fr' ? 'active' : ''} onClick={() => changeLocale('fr')} aria-pressed={locale === 'fr'}>FR</button>
     </div>
   );
 }
