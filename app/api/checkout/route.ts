@@ -30,18 +30,24 @@ export async function POST(req: Request) {
     }
 
     const stripe = getStripe();
+    const origin = new URL(req.url).origin;
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items: [{ price: product.stripe_price_id, quantity: 1 }],
       customer_email: user.email ?? undefined,
       metadata: { user_id: user.id, product_id: product.id },
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?checkout=success`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product.slug}`,
+      success_url: `${origin}/dashboard?checkout=success`,
+      cancel_url: `${origin}/products/${product.slug}`,
     });
 
     return NextResponse.json({ url: session.url });
   } catch (e) {
-    console.error(e);
-    return NextResponse.json({ error: 'Checkout could not be created' }, { status: 500 });
+    console.error('Checkout creation failed:', e);
+    const message = e instanceof Stripe.errors.StripeError
+      ? `Stripe: ${e.message}`
+      : e instanceof Error
+        ? e.message
+        : 'Checkout could not be created';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
