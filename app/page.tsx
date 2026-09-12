@@ -16,11 +16,11 @@ export default async function Home() {
   return <>
     <SiteHeader />
     <main>
-      <section className="container hero">
+      <section className="container hero premium-hero home-hero">
         <div className="hero-layout">
-          <div>
+          <div className="home-hero-copy">
             <span className="eyebrow">Algorithmic trading technology</span>
-            <h1>Trading systems.<br /><span className="gradient">Built to be measured.</span></h1>
+            <h1>Trading systems.<br /><span className="hero-gradient-text">Built to be measured.</span></h1>
             <p className="hero-copy muted">Premium MetaTrader 5 Expert Advisors and TradingView strategies designed for systematic traders who care about process, evidence and controlled execution.</p>
             <div className="hero-actions">
               <Link className="btn btn-accent" href="/products" prefetch>Explore products <span aria-hidden>→</span></Link>
@@ -32,7 +32,7 @@ export default async function Home() {
               <div className="trust-item"><strong>One-time purchase</strong><span>No recurring subscription in V1</span></div>
             </div>
           </div>
-          <div className="hero-panel" aria-hidden="true">
+          <div className="hero-panel home-hero-visual" aria-hidden="true">
             <div className="hero-orbit">
               <div className="hero-orbit-core">TT</div>
               <div className="hero-metric one"><strong>MT5 + TV</strong><span>Execution stack</span></div>
@@ -59,7 +59,8 @@ export default async function Home() {
       </section>
 
       <section className="container section-tight">
-        <div className="card card-dark" style={{padding:'48px 42px',position:'relative',overflow:'hidden'}}>
+        <div className="card card-dark home-evidence-card" style={{position:'relative',overflow:'hidden'}}>
+          <div className="home-evidence-glow" aria-hidden="true" />
           <div style={{position:'relative',zIndex:1,maxWidth:760}}>
             <span className="eyebrow" style={{background:'rgba(255,255,255,.07)',borderColor:'rgba(255,255,255,.12)',color:'#bbaeff'}}>Measured, not marketed</span>
             <h2 style={{fontSize:'clamp(34px,5vw,56px)',lineHeight:1.02,letterSpacing:'-.055em',margin:'18px 0'}}>Backtests. Monte Carlo. Context.</h2>
